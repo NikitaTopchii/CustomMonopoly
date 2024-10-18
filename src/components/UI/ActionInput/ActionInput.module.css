@@ -1,0 +1,16 @@
+
+.actionInput {
+    width: 100%;
+    height: 40px;
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    font-size: 14px;
+    border: none;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.actionInput:focus{
+    outline:none;
+}
