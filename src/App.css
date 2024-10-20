@@ -88,6 +88,7 @@
     border-left: 1px solid black;
     border-top: 1px solid black;
     cursor: pointer;
+    background: round;
 }
 
 .monopoly-board__top-right-cell{
@@ -99,6 +100,7 @@
     border-top: 1px solid black;
     border-left: 1px solid black;
     cursor: pointer;
+    background: round;
 }
 
 .monopoly-board__bottom-right-cell{
@@ -108,6 +110,7 @@
     grid-column-end: 14;
     border: 1px solid black;
     cursor: pointer;
+    background: round;
 }
 
 .monopoly-board__bottom-left-cell{
@@ -119,6 +122,7 @@
     border-bottom: 1px solid #000000;
     border-top: 1px solid #000000;
     cursor: pointer;
+    background: round;
 }
 
 .corner-cell-background{

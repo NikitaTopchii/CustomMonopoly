@@ -28,3 +28,14 @@ input[type="file"]{
     border: none;
     cursor: pointer;
 }
+
+.cropperActionBlock{
+    width: 300px;
+    height: 300px;
+    position: relative;
+}
+
+.cellDataTextForm{
+    width: 150px;
+    margin: 20px;
+}

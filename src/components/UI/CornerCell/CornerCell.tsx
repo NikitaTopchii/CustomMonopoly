@@ -1,33 +1,34 @@
 
-import React, {useState} from "react";
-import CropperForm from "../Cropper/CropperForm";
+import React, { useState } from "react";
 import CustomModal from "../CustomModal/CustomModal";
+import CropperForm from "../Cropper/CropperForm";
 
-const CornerCell = (props: { cellStyle: string, setBackground?: (state: boolean) => void, backgroundImageUrl?: string }) => {
-
+const CornerCell = (props: { cellStyle: string }) => {
     const [modal, setModal] = useState(false);
-    const [number, setNumber] = useState(0);
-
-    const [backgroundImageCornerCells, setBackgroundImageCornerCells] = React.useState('');
+    const [backgroundImageCornerCells, setBackgroundImageCornerCells] = useState('');
 
     const setCroppedImage = (url: string) => {
-        setBackgroundImageCornerCells(url)
-    }
+        setBackgroundImageCornerCells(url);
+        setModal(false);  // Закриваємо модальне вікно після збереження кропнутого зображення
+    };
+
+    const openCropper = () => {
+        setModal(true);
+    };
 
     return (
         <div
-            style={{backgroundImage: `url(${backgroundImageCornerCells})`}}
+            style={{ backgroundImage: `url(${backgroundImageCornerCells})` }}
             className={"monopoly-board__" + props.cellStyle}
-            onClick={() => { setModal(true); setNumber(number + 1) }}
+            onClick={openCropper}
         >
-            { number }
             <div onClick={(event) => event.stopPropagation()}>
                 <CustomModal visible={modal} setModal={setModal}>
-                    <CropperForm setCroppedImage={setCroppedImage} clearImage={setModal}/>
+                    <CropperForm setCroppedImage={setCroppedImage} clearImage={setModal} />
                 </CustomModal>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default CornerCell;
