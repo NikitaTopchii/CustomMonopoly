@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import Cropper from "react-easy-crop";
 import { Area } from "react-easy-crop/types";
 import classes from "./CropperForm.module.css";
 import ActionInput from "../ActionInput/ActionInput";
 import ActionButton from "../ActionButton/ActionButton";
 
-const CropperForm = (props: { setCroppedImage: (url: string) => void, clearImage: (state: boolean ) => void }) => {
+const CropperForm = (props: { setCroppedImage: (url: string, place: string) => void, clearImage: (state: boolean ) => void, cellPlace: string }) => {
+
+    useEffect(() => {
+        console.log('cellPlace has changed:', props.cellPlace);
+    }, [props.cellPlace]);
 
     const [crop, setCrop] = useState({ x: 0, y: 0 });
     const [zoom, setZoom] = useState(1);
@@ -16,25 +20,31 @@ const CropperForm = (props: { setCroppedImage: (url: string) => void, clearImage
         setCroppedAreaPixels(croppedAreaPixels);
     };
 
-    const onChange = (e: any) => {
+    const onChange = (e: React.ChangeEvent<HTMLInputElement>, placeCell: string) => {
+        console.log('cell place: ' + placeCell)
         e.preventDefault();
-        let files;
-        if (e.dataTransfer) {
-            files = e.dataTransfer.files;
-        } else if (e.target) {
-            files = e.target.files;
-        }
+
+        const files = e.target.files;
+
         if (files && files.length > 0) {
+            const file = files[0];
             const reader = new FileReader();
+
             reader.onload = () => {
-                setImageTemplate(reader.result as string);
+                const result = reader.result as string;
+                console.log('Uploaded image:', result);
+                setImageTemplate(result);
             };
-            reader.readAsDataURL(files[0]);
+
+            reader.readAsDataURL(file);
         }
     };
 
 
     const cropImage = async () => {
+
+        console.log('imageTemplate: ' + imageTemplate)
+
         if (!imageTemplate || !croppedAreaPixels) return;
 
         const image = new Image();
@@ -55,7 +65,7 @@ const CropperForm = (props: { setCroppedImage: (url: string) => void, clearImage
             );
 
             const croppedImageUrl = canvas.toDataURL();
-            props.setCroppedImage(croppedImageUrl);
+            props.setCroppedImage(croppedImageUrl, props.cellPlace);
         };
     };
 
@@ -65,7 +75,8 @@ const CropperForm = (props: { setCroppedImage: (url: string) => void, clearImage
                 <label htmlFor="file-upload" className={classes.cropperFileInput}>
                     upload image
                 </label>
-                <input type="file" id="file-upload" onChange={onChange} className={classes.cropperFileInput} />
+                <input type="file" id="file-upload" onChange={(e) => onChange(e, props.cellPlace)} className={classes.cropperFileInput} />
+                {props.cellPlace}
                 {imageTemplate && (
                     <div className={classes.cropperActionBlock}>
                         <Cropper

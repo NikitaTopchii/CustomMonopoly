@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, {useState} from "react";
 import CornerCell from "./UI/CornerCell/CornerCell";
 import SideCells from "./UI/SideCells/SideCells";
  
@@ -52,17 +52,50 @@ const MonopolyBoard = () => {
         secondCellColor: 'six-color',
     };
 
+    const [cornerCellState, setCornerCellState] = useState({
+        topLeftCellBackgroundUrl: '',
+        topRightCellBackgroundUrl: '',
+        bottomLeftCellBackgroundUrl: '',
+        bottomRightCellBackgroundUrl: ''
+    })
+
+    const setCornerCellStateConcrete = (url: string, place: string) => {
+        console.log('place: ' + place)
+        console.log('url: ' + url.slice(0, 10))
+        switch (place){
+            case 'top-left-cell': {
+                setCornerCellState({
+                    ...cornerCellState,
+                    topLeftCellBackgroundUrl: url,
+                })
+                break;
+            }
+            case 'top-right-cell': {
+                setCornerCellState({
+                    ...cornerCellState,
+                    topRightCellBackgroundUrl: url,
+                })
+                break;
+            }
+            case 'bottom-left-cell': {
+                setCornerCellState({
+                    ...cornerCellState,
+                    bottomLeftCellBackgroundUrl: url,
+                })
+                break;
+            }
+            case 'bottom-right-cell': {
+                setCornerCellState({
+                    ...cornerCellState,
+                    bottomRightCellBackgroundUrl: url,
+                })
+                break;
+            }
+        }
+    }
+
     return (
         <div className="monopoly-board">
-
-            <SideCells
-                body={leftCells}
-                firstCells={firstLeftCells}
-                secondCells={secondLeftCells}
-                partType={ { first: 'side-first', second: 'side-second' }}
-            />
-
-            <CornerCell cellStyle={'top-left-cell'}/>
 
             <SideCells
                 body={topCells}
@@ -72,7 +105,16 @@ const MonopolyBoard = () => {
                 optionPartStyle={'top-option-cell'}
             />
 
-            <CornerCell cellStyle={'top-right-cell'}/>
+            <CornerCell cellStyle={'top-right-cell'} cornerCellBackgroundUrl={cornerCellState.topRightCellBackgroundUrl} setCroppedImage={setCornerCellStateConcrete}/>
+
+            <SideCells
+                body={leftCells}
+                firstCells={firstLeftCells}
+                secondCells={secondLeftCells}
+                partType={ { first: 'side-first', second: 'side-second' }}
+            />
+
+            <CornerCell cellStyle={'top-left-cell'} cornerCellBackgroundUrl={cornerCellState.topLeftCellBackgroundUrl} setCroppedImage={setCornerCellStateConcrete}/>
 
             <SideCells
                 body={rightCells}
@@ -83,7 +125,7 @@ const MonopolyBoard = () => {
 
             <div className="monopoly-board__center-cell"></div>
 
-            <CornerCell cellStyle={'bottom-right-cell'}/>
+            <CornerCell cellStyle={'bottom-right-cell'} cornerCellBackgroundUrl={cornerCellState.bottomRightCellBackgroundUrl} setCroppedImage={setCornerCellStateConcrete}/>
 
             <SideCells
                 body={bottomCells}
@@ -92,7 +134,7 @@ const MonopolyBoard = () => {
                 partType={ { first: 'top-first', second: 'top-second' }}
                 optionPartStyle={'top-option-cell'}/>
 
-            <CornerCell cellStyle={'bottom-left-cell'}/>
+            <CornerCell cellStyle={'bottom-left-cell'} cornerCellBackgroundUrl={cornerCellState.bottomLeftCellBackgroundUrl} setCroppedImage={setCornerCellStateConcrete}/>
         </div>
     )
 }
