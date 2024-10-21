@@ -1,5 +1,5 @@
 
-import React, { useState} from "react";
+import React, { useState } from "react";
 import CustomModal from "../CustomModal/CustomModal";
 import CropperForm from "../Cropper/CropperForm";
 
@@ -19,10 +19,10 @@ const CornerCell = (props: { cellStyle: string, cornerCellBackgroundUrl: string,
         >
             {props.cellStyle}
             <div onClick={(event) => event.stopPropagation()}>
-                <CustomModal visible={modal} setModal={setModal}>
+                {modal && (<CustomModal visible={modal} setModal={setModal}>
                     <CropperForm setCroppedImage={props.setCroppedImage} clearImage={setModal}
                                  cellPlace={props.cellStyle}/>
-                </CustomModal>
+                </CustomModal>)}
             </div>
         </div>
     );
