@@ -1,6 +1,8 @@
 import React, {useRef, useState} from "react";
 import CustomModal from "../CustomModal/CustomModal";
 import CropperForm from "../Cropper/CropperForm";
+import CellDescriptionForm from "../CellDescriptionForm/CellDescriptionForm";
+import classes from "./SideCell.module.css";
 
 interface SideCellProps {
     sideCellStyle: string;
@@ -16,44 +18,69 @@ const SideCell: React.FC<SideCellProps> = (props) => {
 
     const [backgroundImageCornerCells, setBackgroundImageCornerCells] = useState('');
 
+    const [cellDescription, setCellDescription] = useState('');
+
     const setCroppedImage = (url: string) => {
         setBackgroundImageCornerCells(url);
         setModal(false);  // Закриваємо модальне вікно після збереження кропнутого зображення
     };
 
-    const openCropper = () => {
-        setModal(true);
+    const openCropper = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+        console.log('openCropper')
+        const target = event.target as HTMLElement;
+
+        if (target.classList.contains('monopoly-board__' + props.sideCellStyle) || target.classList.contains("monopoly-board__" + props.sideCellStyle + ' ' + props.optionStyle)) {
+            setModal(true);
+        }
     };
 
     const colorInputRef = useRef<HTMLInputElement>(null);
 
-    const handleDivClick = () => {
+    const handleDivClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+        event.stopPropagation();
         if (colorInputRef.current) {
             colorInputRef.current.click();
         }
     };
 
-    return (
-        <div className={"monopoly-board__" + props.sideCellStyle + ' ' + props.optionStyle} onClick={openCropper}
-             style={{backgroundImage: `url(${backgroundImageCornerCells})`}}>
+    const modalTypeByStyle = () => {
+        switch (props.sideCellStyle){
+            case 'top-cell' || 'bottom-cell':
+                return 'topBottomSideCell';
+            case 'left-cell' || 'right-cell':
+                return 'leftRightSideCell';
+            default:
+                return 'leftRightSideCell'
+        }
+    }
 
+    return (
+        <div className={"monopoly-board__" + props.sideCellStyle + ' ' + props.optionStyle} onClick={(e) => openCropper(e)} style={{backgroundImage: `url(${backgroundImageCornerCells})`}}>
             {
                 props.optionStyle
                     ? undefined
-                    : <div className={props.sideCellStyle + "-color " + props.colorNumber} onClick={handleDivClick}
+                    : <div className={props.sideCellStyle + "-color " + props.colorNumber}
+                           onClick={(e) => handleDivClick(e)}
                            style={{background: props.pickedColor}}>
+                        <input
+                            type='color'
+                            id="head"
+                            name="head"
+                            defaultValue="#e66465"
+                            ref={colorInputRef}
+                            onChange={(e) => props.changeColor(e.target.value)}
+                            style={{display: 'none'}}
+                        />
                     </div>
             }
 
-            <input
-                type='color'
-                id="head"
-                name="head"
-                defaultValue="#e66465"
-                ref={colorInputRef}
-                onChange={(e) => props.changeColor(e.target.value)}
-                style={{display: 'none'}}
-            />
+            <span className={classes.sideCellDescription}>{cellDescription}</span>
+
+            {modal && (<CustomModal visible={modal} setModal={setModal}>
+                <CellDescriptionForm setCellDescription={setCellDescription}/>
+                <CropperForm setCroppedImage={setCroppedImage} clearImage={setModal}
+                             cropperType={modalTypeByStyle()}/>
+            </CustomModal>)}
         </div>
     );
 }

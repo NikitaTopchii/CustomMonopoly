@@ -1,0 +1,16 @@
+
+.cellDescription135deg{
+    rotate: 135deg;
+}
+
+.cellDescription45deg{
+    rotate: 45deg;
+}
+
+.negativeCellDescription45deg{
+    rotate: -45deg;
+}
+
+.negativeCellDescription135deg{
+    rotate: -135deg;
+}

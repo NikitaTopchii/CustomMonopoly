@@ -88,6 +88,10 @@
     border-left: 1px solid black;
     border-top: 1px solid black;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     background: round;
 }
 
@@ -100,6 +104,10 @@
     border-top: 1px solid black;
     border-left: 1px solid black;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     background: round;
 }
 
@@ -110,6 +118,10 @@
     grid-column-end: 14;
     border: 1px solid black;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     background: round;
 }
 
@@ -122,6 +134,10 @@
     border-bottom: 1px solid #000000;
     border-top: 1px solid #000000;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     background: round;
 }
 
@@ -144,6 +160,7 @@
     border-top: 1px solid #000000;
     display: grid;
     grid-template-columns: repeat(6, 1fr);
+    background: round;
 }
 
 .monopoly-board__top-cell{
@@ -154,6 +171,7 @@
     border-top: 1px solid #000000;
     display: grid;
     grid-template-rows: repeat(6, 1fr);
+    background: round;
 }
 
 .monopoly-board__right-cell{
@@ -162,6 +180,7 @@
     border-top: 1px solid #000000;
     display: grid;
     grid-template-columns: repeat(6, 1fr);
+    background: round;
 }
 
 .monopoly-board__bottom-cell{
@@ -172,14 +191,15 @@
     border-top: 1px solid #000000;
     display: grid;
     grid-template-rows: repeat(6, 1fr);
+    background: round;
 }
 
 .option{
-    background: #22bc89;
+    background: #22bc89 round;
 }
 
 .option-center{
-    background: blueviolet;
+    background: blueviolet round;
 }
 
 .left-cell-color{

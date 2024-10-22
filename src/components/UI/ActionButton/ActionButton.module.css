@@ -6,7 +6,16 @@
     border-radius: 6px;
     border: none;
     font-size: 16px;
+    transition: 0.2s;
     font-weight: bold;
     box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
     cursor: pointer;
+}
+
+.actionButton:disabled{
+    background: #22bc89;
+}
+
+.actionButton:hover{
+    scale: 1.03;
 }
