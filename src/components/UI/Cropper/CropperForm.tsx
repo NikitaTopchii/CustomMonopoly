@@ -43,6 +43,8 @@ const CropperForm = (props: { setCroppedImage: (url: string) => void, clearImage
                 return 9 / 16;
             case 'leftRightSideCell':
                 return 16 / 9;
+            case 'actionCell':
+                return 9 / 16;
             default:
                 return 1;
         }

@@ -1,0 +1,14 @@
+
+.actionCell {
+    width: 100px;
+    height: 200px;
+    border: 1px solid black;
+    background: round;
+}
+
+.modalWrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: none;
+}

@@ -1,13 +1,6 @@
 import SideCell from "../SideCell/SideCell";
 import React, {useState} from "react";
-
-interface Cell {
-    sideCellsStyle: string,
-    sideCellStyle: string,
-    firstCellColor: string,
-    secondCellColor: string
-}
-
+import {Cell} from "../../utils/Cell.interface";
 
 const PartSideCells = (props: { body: Cell, cells: string[], cellColor: string, partType: string}) => {
 
@@ -19,24 +12,22 @@ const PartSideCells = (props: { body: Cell, cells: string[], cellColor: string, 
 
     return (
         <div className={'part-side-cells ' + props.partType}>
-            { props.cells.map((cell, i) => {
-                if(cell === 'option'){
-                    return <SideCell
-                        sideCellStyle={props.body.sideCellStyle}
-                        colorNumber={'eight-color'}
-                        optionStyle={'option'}
-                        key={i}
-                        changeColor={changeColor} />
-                } else {
-                    return <SideCell
-                        sideCellStyle={props.body.sideCellStyle}
-                        colorNumber={props.cellColor}
-                        key={i} changeColor={changeColor}
-                        pickedColor={cellsPickedColor}/>
-                }
+            {props.cells.map((cell, i) => {
+                const sideCellProps = {
+                    sideCellStyle: props.body.sideCellStyle,
+                    key: i,
+                    changeColor,
+                    pickedColor: cellsPickedColor,
+                };
+
+                return cell === 'option' ? (
+                    <SideCell {...sideCellProps} colorNumber="eight-color" optionStyle="option" />
+                ) : (
+                    <SideCell {...sideCellProps} colorNumber={props.cellColor} />
+                );
             })}
         </div>
-    )
+    );
 }
 
 export default PartSideCells;

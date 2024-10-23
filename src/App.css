@@ -145,13 +145,6 @@
     background: round;
 }
 
-.monopoly-board__center-cell{
-    grid-column-start: 3;
-    grid-column-end: 12;
-    grid-row-start: 3;
-    grid-row-end: 12;
-}
-
 .monopoly-board__left-cell{
     grid-column-start: 1;
     grid-column-end: 2;

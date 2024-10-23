@@ -2,6 +2,7 @@
 import React from "react";
 import CornerCell from "./UI/CornerCell/CornerCell";
 import SideCells from "./UI/SideCells/SideCells";
+import MainCell from "./UI/MainCell/MainCell";
  
 interface Cell {
     sideCellsStyle: string,
@@ -81,7 +82,7 @@ const MonopolyBoard = () => {
                 partType={ { first: 'side-first', second: 'side-second' }}
             />
 
-            <div className="monopoly-board__center-cell"></div>
+            <MainCell/>
 
             <CornerCell cellStyle={'bottom-right-cell'}/>
 

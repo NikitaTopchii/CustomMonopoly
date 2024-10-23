@@ -1,13 +1,7 @@
 import React from "react";
 import SideCell from "../SideCell/SideCell";
 import PartSideCells from "../PartSideCells/PartSideCells";
-
-interface Cell {
-    sideCellsStyle: string,
-    sideCellStyle: string,
-    firstCellColor: string,
-    secondCellColor: string
-}
+import {Cell} from "../../utils/Cell.interface";
 
 const SideCells = (
     props: {

@@ -3,16 +3,10 @@ import CustomModal from "../CustomModal/CustomModal";
 import CropperForm from "../Cropper/CropperForm";
 import CellDescriptionForm from "../CellDescriptionForm/CellDescriptionForm";
 import classes from "./SideCell.module.css";
+import {SideCellPropsInterface} from "../../utils/SideCellProps.interface";
 
-interface SideCellProps {
-    sideCellStyle: string;
-    colorNumber?: string;
-    optionStyle?: string;
-    changeColor: (color: string) => void;
-    pickedColor?: string;
-}
 
-const SideCell: React.FC<SideCellProps> = (props) => {
+const SideCell: React.FC<SideCellPropsInterface> = (props) => {
 
     const [modal, setModal] = useState(false);
 
@@ -44,14 +38,13 @@ const SideCell: React.FC<SideCellProps> = (props) => {
     };
 
     const modalTypeByStyle = () => {
-        switch (props.sideCellStyle){
-            case 'top-cell' || 'bottom-cell':
-                return 'topBottomSideCell';
-            case 'left-cell' || 'right-cell':
-                return 'leftRightSideCell';
-            default:
-                return 'leftRightSideCell'
+        if (['top-cell', 'bottom-cell'].includes(props.sideCellStyle)) {
+            return 'topBottomSideCell';
         }
+        if (['left-cell', 'right-cell'].includes(props.sideCellStyle)) {
+            return 'leftRightSideCell';
+        }
+        return 'leftRightSideCell';
     }
 
     return (
